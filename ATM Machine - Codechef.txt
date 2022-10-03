@@ -1,0 +1,23 @@
+import scala.io.StdIn._
+
+object Main extends App {
+    var t = readInt()
+    for(i <- 0 until t){
+        var str = readLine().split(" ").map(st => st.toInt)
+        var n = str(0)
+        var k = str(1)
+        var arrayStr = readLine().split(" ").map(st => st.toInt)
+        var res = ""
+        for(i <- 0 to n-1){
+            if(k >= arrayStr(i)){
+                res = res + "1"
+                k = k - arrayStr(i)
+            }else{
+                res = res + "0"
+            }
+        }
+        
+        println(res)
+    }
+}
+
