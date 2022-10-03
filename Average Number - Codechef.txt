@@ -1,0 +1,37 @@
+/*
+Chef had a sequence of positive integers with length N + KN+K. He managed to calculate the arithmetic average of all elements of this sequence (let's denote it by VV), but then, his little brother deleted KK elements from it. All deleted elements had the same value.
+Chef still knows the remaining NN elements — a sequence A_1, A_2,..., A_N. 
+​Help him with restoring the original sequence by finding the value of the deleted elements or deciding that there is some mistake and the described scenario is impossible.
+Note that the if it is possible for the deleted elements to have the same value, then it can be proven that it is unique. Also note that this value must be a positive integer.
+
+Input
+The first line of the input contains a single integer TT denoting the number of test cases. The description of TT test cases follows.
+The first line of each test case contains three space-separated integers NN, KK and VV.
+The second line contains NN space-separated integers A_1, A_2,..., A_N.
+ .
+Output
+For each test case, print a single line containing one integer — the value of the deleted elements, or -1−1 if there is a mistake.
+*/
+
+import scala.io.StdIn._
+
+object Main extends App {
+	var t = readInt()
+	for(i<-0 until t){
+	    var arr = readLine().split(" ").map(st=> st.toInt)
+	    var n = arr(0)
+	    var k = arr(1)
+	    var v = arr(2)
+	    var a = readLine().split(" ").map(st=> st.toInt)
+	    var sum = 0 
+	    for(i<-a){
+	        sum+=i
+	    }
+	    var value = (v*(k+n)-sum).toDouble/k
+	    if(value>0 && (value%1== 0))
+	    println(value.toInt)
+	    else
+	    println(-1)
+
+	}
+}
