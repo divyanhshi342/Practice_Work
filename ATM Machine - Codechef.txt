@@ -1,3 +1,19 @@
+/*
+There is an ATM machine. Initially, it contains a total of KK units of money. NN people (numbered 11 through NN) want to withdraw money; for each valid ii, the ii-th person wants to withdraw A_i units of money.
+
+The people come in and try to withdraw money one by one, in the increasing order of their indices. Whenever someone tries to withdraw money, if the machine has at least the required amount of money, it will give out the required amount. Otherwise, it will throw an error and not give out anything; in that case, this person will return home directly without trying to do anything else.
+
+For each person, determine whether they will get the required amount of money or not.
+
+Input
+The first line of the input contains a single integer TT denoting the number of test cases. The description of TT test cases follows.
+The first line of each test case contains two space-separated integers NN and KK.
+The second line contains NN space-separated integers A_1, A_2,...., A_N.
+
+Output
+For each test case, print a single line containing a string with length NN. For each valid ii, the ii-th character of this string should be '1' if the ii-th person will successfully withdraw their money or '0' otherwise.
+*/
+
 import scala.io.StdIn._
 
 object Main extends App {
