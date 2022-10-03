@@ -1,0 +1,52 @@
+/*
+Given an array of numbers. If the sum of elements in an array(Except Maximum number) is equal to to maximum number print "Yes" and array sum. If it is not equal to maximum number Just print Sum. [You should use only one loop in program.]
+
+Input Format
+
+First line contains integer value 'N' denotes the no of elements. next 'N' lines contains array elements.
+
+Constraints
+
+2<= N <=1000000000
+
+-1000000000 <= array elements <= 1000000000
+
+Output Format
+
+Single line of integer value.
+*/
+
+import scala.io.StdIn._ 
+
+object Solution {
+
+    def main(args: Array[String]) {
+        var num = readLine().trim()
+        var n = num.toInt
+        var arr = new Array[Int](n)
+        for(i <- 0 to n-1){
+            arr(i) = readLine().trim().toInt
+        }
+        
+        scala.util.Sorting.quickSort(arr)
+    
+        var sum = 0
+        var count = 0 
+        var max_val = arr(n-1)
+        for(i <- 0 to n-1){
+            if(arr(i)==max_val){
+                max_val = arr(i)
+                count+=1
+            }
+            sum += arr(i)
+        }
+       
+        sum = sum - (max_val*count)
+        if(sum==max_val){
+            println("Yes")
+            println(sum)
+        }else{
+            println(sum)
+        }
+    }
+}
