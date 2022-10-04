@@ -1,0 +1,40 @@
+/*
+Manasa started to attend programming lessons. On the first lesson her task was to write a simple program. The program was supposed to do the following: in the given string, consisting if uppercase and lowercase Latin letters, it:
+deletes all the vowels,inserts a character "." before each consonant,replaces all uppercase consonants with corresponding lowercase ones.
+Vowels are letters "A", "O", "Y", "E", "U", "I", and the rest are consonants. The program's input is exactly one string, it should return the output as a single string, resulting after the program's processing the initial string.
+Help Manasa cope with this easy task.
+
+Input Format
+The first line represents input string of Petya's program. This string only consists of uppercase and lowercase Latin letters
+
+Constraints
+1<= Length<= 1000
+
+Output Format
+Print the resulting string. It is guaranteed that this string is not empty.
+*/
+
+import scala.io.StdIn._
+
+object Solution {
+
+    def main(args: Array[String]) {
+        var str = readLine()
+        var s=""
+        for(i<-str){
+            if(!(i.equals('a') || i.equals('e') ||  i.equals('y') ||
+               i.equals('i') || i.equals('o') ||
+               i.equals('u') || i.equals('A') || 
+               i.equals('E') || i.equals('I') ||  i.equals('Y') ||
+               i.equals('O') || i.equals('U') )){
+                s+=i
+            } 
+        }
+        var res = ""
+        for(i <- 0 until s.length){
+            res+="."+s.charAt(i)
+        }
+        res = res.toLowerCase()
+        println(res)
+    }
+}
