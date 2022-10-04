@@ -1,0 +1,38 @@
+/*
+Given a string,str=s1,s2...sn,consisting of n lowercase English characters (a-z), remove all of the characters that occurred previously in the string. Formally, remove all characters, si , for:
+j,si = s1 and j<i
+
+Input Format
+
+A single line of input containing a string str of length n .
+
+Output Format
+
+Print the string after removing all the characters that occurred previously.
+*/
+
+
+import scala.io.StdIn._
+
+object Solution {
+
+    def reduction(s:String):String={
+       var sb = new StringBuilder("")
+       
+       def string_reduction(j:Int,sb:StringBuilder):String={
+       if(j==s.length){
+         return sb.toString
+       }else{
+          if(!(sb.contains(s.charAt(j)))){
+             sb+=s.charAt(j)
+          }
+             return string_reduction(j+1,sb) 
+         }
+       }
+       string_reduction(0,sb)
+    }
+    def main(args: Array[String]) {
+    var s = readLine()
+    println(reduction(s))
+    }
+}
