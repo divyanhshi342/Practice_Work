@@ -1,0 +1,40 @@
+import scala.io.StdIn._ 
+
+/*
+Pawel and Shaka recently became friends. They believe their friendship will last forever if they merge their favorite strings
+The lengths of their favorite strings are the same,n . Mingling two strings, P = p1p2...pn and Q = q1q2...qn, both of length n , will result in the creation of a new string R of length 2xn. It will have the following structure:
+R = p1q1p2q2...pnqn
+You are given two strings P (Pawel's favorite) and Q (Shaka's favorite), determine the mingled string R .
+
+Input Format
+
+The first line of input contains the string P and Q.
+The second line contains R.
+
+Output Format
+
+Print the mingled string,R.
+*/
+
+object Solution {
+
+def string_method(p:String,q:String):String={
+
+    var c = new StringBuilder("")
+    
+def string_mingling(i:Int, s:StringBuilder):String={
+        if(i==p.length){
+           return s.toString
+        }    
+        s+=p.charAt(i)
+        s+=q.charAt(i)
+        return string_mingling(i+1,s)
+    }
+    string_mingling(0,c)
+    }
+    def main(args: Array[String]) {
+    var p = readLine()
+    var q = readLine()
+    println(string_method(p,q))
+    }
+}
