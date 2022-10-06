@@ -1,0 +1,52 @@
+/*
+In 1974, a very fast string searching method was proposed by the name of KMP algorithm with linear run-time complexity. 
+Your task here is to code this (or any similar) algorithm in a functional language.
+Given two strings text and pat, find whether pat exists as a substring in text.
+
+Input
+First line will contain an integer, T, which represents total number of test cases. Then T test cases follow. 
+Each case will contains two lines each containing a string. First line will contain text while the second line will contain pat.
+
+Output
+For each case print YES if pat is a substring of text otherwise NO.
+*/
+
+import scala.io.StdIn._
+import scala.util.control.Breaks._
+
+object Solution {
+
+    def main(args: Array[String]) {
+       var t = readLine().toInt
+       for(i<-0 to t-1){
+         var text = readLine().trim()
+         var pat = readLine().trim()
+         
+          if(pat.length <= text.length){
+            var i = 0
+            var flag = 0
+            breakable{
+            for(j<-0 to text.length-1){
+               if(pat.charAt(i).equals(text.charAt(j))){
+                  i+=1
+                  if(i==pat.length){
+                  flag = 1
+                    break
+                  }
+               }else{
+               i = 0
+               }
+            }
+            }
+            if(flag==1){
+            println("YES")
+            }else{
+            println("NO")
+            }
+         }else{
+           println("NO")
+         }
+         
+       }
+    }
+}
