@@ -1,0 +1,25 @@
+/*
+You are given a string, str, of length N consisting of lowercase letters of alphabet.
+You have to remove all those characters from str which have already appeared in it, i.e., you have to keep only first occurance of each letter.
+
+Input Format
+First line of input contains a string str of length N.
+
+Output Format
+A string with removed characters as described in the problem.
+*/
+
+import scala.io.StdIn._
+
+object Solution {
+
+    def main(args: Array[String]) {
+        var s = readLine()
+        var str = ""
+        for(i<-0 until s.length){
+         if(!str.contains(s(i)))
+            str+=s(i)
+        }
+        println(str)
+    }
+}
