@@ -1,0 +1,66 @@
+/*
+Bunnies are very cute animals who likes to jump a lot. Every bunny has his own range of jump. Lets say there are N bunnies and ith (i - 1 to N) bunny jumps ji units.
+Consider a 1-D plane, where initially bunnies are at . All of them starts jumping in forward direction.
+For example, consider the case of kth bunny. Initially he is at 0. After first jump, he will be at point jk. After second, he will be at 2 x jk and so on.
+After mth jump, he will be at point m x jk.
+Two bunnies can only meet each other when they are on the ground. When on the ground, a bunny can wait any amount of time. Being a social animal,
+all of them decide to meet at the next point where all of them will be on the ground. You have to find the nearest point where all the bunnies can meet.
+For example, if there are N = 3 bunnies where j1 = 2, j2 = 3 , j3 = 4. Nearest point where all bunnies can meet again is at 12. First bunny has to jump six times, for second it is 4 times and for third it is 3 times.
+Help bunnies to find the nearest point where they can meet again.
+
+Input Format
+First line will contain an integer, N , represeting the number of bunnies. Second line will contain N space separated integer, j1,j2,...jn ,
+representing the jumping distance of them.
+
+Output Format
+Print the nearest location where all bunnies can meet again.
+*/
+
+import scala.io.StdIn._
+import scala.collection.mutable.ListBuffer
+
+
+object Solution {
+
+
+    def meetingPoint(arr:Array[Int],n:Int):Long = {
+        var max_ele = Integer.MIN_VALUE
+        for(i<-0 to n-1){
+           if(max_ele<arr(i)){
+             max_ele = arr(i)
+           }
+        }
+        var f = 2
+        var res = 1L
+        
+        while(f<=max_ele){
+          var li = new ListBuffer[Int]()
+          for(i<-0 to n-1){
+           if(arr(i)%f == 0){
+             li+=(i)
+           }
+        }
+        if(li.size>=2){
+        for(i<-0 to li.size-1){
+           arr(li(i)) = arr(li(i))/f
+        }
+        res *= f
+        }else{
+           f+=1
+        }
+        }
+        
+        for(i<-0 to n-1){
+          res *= arr(i).toLong
+        }
+        return res
+    }
+    
+    
+    
+    def main(args: Array[String]) {
+        var n = readLine().toInt
+        var arr = readLine().split(" ").map(_.toInt)
+        println(meetingPoint(arr,n))
+    }
+}
