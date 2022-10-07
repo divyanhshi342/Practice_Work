@@ -1,0 +1,41 @@
+/*
+Scturtle likes strings very much. He is getting bored today, because he has already completed this week's task and doesn't have anything else to do.
+So he starts left-rotating a string.
+If the length of the string is n , then he will rotate it n times and note down the result of each rotation on a paper.
+
+Input Format
+The first line contains an integer, T , which represents the number of test cases to follow. Then follows T lines, which represent a test case each.
+Each test case contains a string, S , which consists of lower case latin characters a-z only.
+
+Output Format
+For each test case, print all the rotations, r1,r2...rn , separated by a space.
+*/
+
+import scala.io.StdIn._
+
+object Solution {
+
+
+    def rotate(str:String):String = {
+       var s = ""
+       var f = str(0)
+       for(i<-0 to str.length-2){
+         s += str.charAt(i+1)
+       }
+       s = s:+f
+       return s
+    }
+    
+    def main(args: Array[String]) {
+        var t = readLine().toInt
+        for(i<-0 to t-1){
+          var str = readLine()
+          for(i<-0 to str.length-1){
+             str = rotate(str)
+             print(str+" ")
+          }
+          
+          println()
+        }
+    }
+}
