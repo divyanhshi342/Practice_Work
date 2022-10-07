@@ -1,0 +1,49 @@
+/*
+Kazama gave Shaun a string of even length, and asked him to swap the characters at the even positions with the next character. 
+Indexing starts at .
+
+Formally, given a string str of length L where L is even, Shaun has to swap the characters at position i and i+1, where i => {0,2,..,L-2}.
+
+Input Format
+
+The first line contains an integer, T , the number of test cases.
+T lines follow, each containing some string str.
+
+Output Format
+
+For each test case, print the new string as explained in the problem statement.
+*/
+
+import scala.io.StdIn._
+
+object Solution {
+
+    def permute(s:String):String = {
+       var str = ""
+       def stringpermute(i:Int,s:String):String = {
+         if(i==s.length){
+           return str
+         }else{
+            str+=s(i+1)
+            str+=s(i)
+            stringpermute(i+2,s)
+         }
+       }
+       stringpermute(0,s)
+    }
+
+    def main(args: Array[String]) {
+    
+        var t = readLine.toInt
+        for(i<-0 until t){
+           var str = readLine
+           var s = ""
+         /*  for(i<-0 until str.length by 2){
+              s+=str(i+1)
+              s+=str(i)
+           }
+          */ 
+           println(permute(str))
+        }
+    }
+}
