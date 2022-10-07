@@ -1,0 +1,46 @@
+/*
+You are in charge of data transfer between two Data Centers. Each set of data is represented by a pair of strings. Over a period of time you have observed a trend: 
+most of the times both strings share some prefix. You want to utilize this observation to design a data compression algorithm which will be used to reduce amount of 
+data to be transferred.
+You are given two strings, x and y, representing the data, you need to find the longest common prefix (p) of the two strings. Then you will send substring p, x' and y',
+where x' and y' are the substring left after stripping p from them.
+
+For example, if  "abcdefpr" and  "abcpqr", then p= "abc", x' = "defpr", y' = "pqr".
+
+Input Format
+
+The first line contains a single string denoting x .
+The second line contains a single string denoting y .
+
+Output Format
+
+In first line, print the length of substring p , followed by prefix p . In second line, print the length of substring x', followed by substring x'.
+Similary in third line, print the length of substring y' , followed by substring y' .
+*/
+
+import scala.io.StdIn._
+import scala.util.control.Breaks._
+
+object Solution {
+
+    def main(args: Array[String]) {
+       var x = readLine.trim
+       var y = readLine.trim
+       var p = ""
+       var min_len = x.length min y.length
+       breakable{
+       for(i<-0 until min_len){
+          if(x(i)==y(i)){
+             p+=x(i)
+          }else{
+             break
+          }
+       }
+       }
+       var xx = x.substring(p.length,x.length)
+       var yy = y.substring(p.length,y.length)
+       println(p.length+" "+p)
+       println(xx.length+" "+xx)
+       println(yy.length+" "+yy)
+    }
+}
