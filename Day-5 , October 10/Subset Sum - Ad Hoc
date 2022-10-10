@@ -1,0 +1,47 @@
+/*
+You are given a list of N positive integers, A = {a[1], a[2], ..., a[N]} and another integer S. You have to find whether there exists a non-empty subset of A 
+whose sum is greater than or equal to S.
+You have to print the size of minimal subset whose sum is greater than or equal to S. If there exists no such subset then print -1 instead.
+
+Input
+First line will contain an integer, N, which is the size of list A. Second line contains N space separated integers, representing the elements of list A.
+In third line there is an integer, T, which represent the number of test cases to follow. Then follows T lines. Each one of them contains an single integer, S.
+
+Output
+For each test case, print the size of minimal subset whose sum is greater than or equal to S. If there's no such subset then print -1.
+*/
+
+import scala.io.StdIn._
+import java.util._
+
+object Solution {
+
+    def main(args: Array[String]) {
+        var n = readLine.toInt
+        var a = readLine.split(" ").map(_.toLong)
+        var sums = new Array[Long](n)
+           for(i<-0 until n){
+             sums(i) = a(i)
+           }
+         scala.util.Sorting.quickSort(sums)
+         sums = sums.reverse
+         for(i<-1 until n){
+           sums(i)+=sums(i-1)
+         }  
+
+        var t = readLine.toInt
+        for(j<-0 until t){
+            var s = readLine.toLong
+            var i: Int = Arrays.binarySearch(sums,s);
+            if (i < 0){
+                i = -i - 1;
+            }
+            i += 1;
+            if (i > n){
+                i = -1;
+            }
+            println(i);
+           }
+           
+    }
+}
