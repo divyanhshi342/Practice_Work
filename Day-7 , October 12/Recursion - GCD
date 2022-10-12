@@ -1,0 +1,43 @@
+/*
+Given the starter code, you need to complete a function body that returns the GCD of two given integers x and y.
+The task of reading in input and printing the output will be handled by us.
+
+Input Format
+
+One line of input containing 2 space separated integers.
+
+Output Format
+
+Output one integer, the GCD of the two given numbers.
+*/
+
+import scala.io.StdIn._
+
+object Solution {
+    
+     def gcd(x: Int, y: Int): Int =
+   {
+		if(x==0 && y>0){
+           return y
+         }else if(y==0 && x>0){
+           return x
+         }else if(x>y){
+             return gcd(x-y,y)
+         }else{
+              return gcd(y-x,x)
+         }
+
+   }
+  
+
+/**This part handles the input/output. Do not change or modify it **/
+  def acceptInputAndComputeGCD(pair:List[Int]) = {
+		println(gcd(pair.head,pair.reverse.head))
+  } 
+
+    def main(args: Array[String]) {
+/** The part relates to the input/output. Do not change or modify it **/
+         acceptInputAndComputeGCD(readLine().trim().split(" ").map(x=>x.toInt).toList)
+
+    }
+}
