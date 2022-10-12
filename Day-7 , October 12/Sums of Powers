@@ -1,0 +1,34 @@
+/*
+Find the number of ways that a given integer, X , can be expressed as the sum of the Nth power of unique, natural numbers.
+
+Input Format
+
+The first line contains an integer X .
+The second line contains an integer N. 
+
+Output Format
+
+Output a single integer, the answer to the problem explained above.
+*/
+
+import scala.io.StdIn._
+
+object Solution {
+    
+    def numberOfWays(X:Int,N:Int):Int = {
+    def summing(x: Int, n: Int, max: Int): Int = {
+       if (x == 0 || x == 1) return 1
+      if (x < 0) return 0 
+            var sum = 0
+      for (i <- max to 2 by -1 if math.pow(2, n).toInt <= x) {
+        sum += summing(x - math.pow(i, n).toInt, n, i - 1)
+      }
+      sum;
+    }
+    summing(X, N, math.pow(X, 1.0 / N).floor.toInt)
+  }
+
+    def main(args: Array[String]) {
+       println(numberOfWays(readInt(),readInt()))
+    }
+}
