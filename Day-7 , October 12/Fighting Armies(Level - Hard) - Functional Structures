@@ -1,0 +1,101 @@
+/*
+Your country is at war!
+As a General, you initially have N armies numbered from 1 to N under your command. Each army consists of some number of soldiers, and each soldier is assigned an
+integer, c , representative of his or her combat ability. Since, you are responsible for all of them, you want to give orders to your armies and query them about 
+their current state. You must handle Q events, where each event is one of the 4 following types:
+
+1. findStrongest(i) - Print the maximum combat ability of  any soldier in army i.
+2. strongestDied(i) - A soldier with the maximum combat ability among all soldiers in army i has died, so the soldier is removed from the army.
+3. recruit(i,c) - A soldier with combat ability c has joined army i.
+4. merge(i,j) - Armies i and j are merged into a single army i , and army j is removed (ceases to exist).
+Note: The input can be quite large, so we suggest you use fast I/O methods.
+
+Input Format
+
+The first line contains 2 space-separated integers, N (the number of armies you command) and Q (the number of events taking place), respectively.
+Each of the Q subsequent lines describes a single event.
+Each event first contains an integer, t , describing the event type.
+If t=1 or t=2 , the line contains 1 more integer denoting the parameter of the event.
+If t=3 or t=4 , the line contains 2 more integers denoting the respective parameters of the event.
+
+Output Format
+
+For each event of type 1, print a single line containing 1 integer denoting the answer for the event.
+*/
+
+/*
+Test case passed = 8 , Test case failed - 13 , Reason - Time limit exceeded may be becoz this problem requires fast I/O methods for taking large input data
+but I didn't find any content related to this.
+*/
+
+import scala.io.StdIn._
+
+object Solution {
+
+
+def findStrongest(a:Int,army:scala.collection.mutable.ListBuffer[List[Long]]): Long={
+     var max_val = Integer.MIN_VALUE.toLong
+     for(i<-0 until army(a-1).size){
+        if(max_val<army(a-1)(i)){
+          max_val=army(a-1)(i) 
+        }
+     }   
+     return max_val
+  }
+  
+def strongestDied(a:Int,army:scala.collection.mutable.ListBuffer[List[Long]]):scala.collection.mutable.ListBuffer[List[Long]]={
+    var arr =  army map(identity)
+    var temp = findStrongest(a,arr)
+    arr(a-1)=arr(a-1).patch(arr(a-1).indexOf(temp), List(), 1)
+    return arr
+}
+
+def recruit(a:Int,c:Long,army:scala.collection.mutable.ListBuffer[List[Long]]):scala.collection.mutable.ListBuffer[List[Long]]={
+    var arr =  army map(identity)
+    var i = arr.zipWithIndex.filter(x=>x._2==(a-1))
+   if(i.isEmpty)
+    arr:+=List(c)
+    else
+   arr(a-1) = arr(a-1) :+ c
+    return arr
+}
+
+def merge(a1:Int,a2:Int,army:scala.collection.mutable.ListBuffer[List[Long]]):scala.collection.mutable.ListBuffer[List[Long]]={
+        var arr =  army map(identity)
+        arr(a1-1) = arr(a1-1) ::: arr(a2-1)
+        arr(a2-1) = List()
+        return arr
+}
+
+    def main(args: Array[String]) {
+        var str = readLine.split(" ").map(_.toInt)
+        var n = str(0) ; var q = str(1)
+        
+        var army= scala.collection.mutable.ListBuffer.empty[List[Long]]
+
+        var a= scala.collection.mutable.ListBuffer.empty[List[Long]]
+        
+        for(i<-0 until q){
+           var l = readLine.split(" ").map(_.toInt)
+           if(l(0)==1 || l(0)==2){
+             a+= List(l(0),l(1))
+           }else if(l(0)==3 || l(0)==4){
+               a+= List(l(0),l(1),l(2))
+           }
+        }
+        
+        for(i<-0 until q){
+           if(a(i)(0)==1){
+           var res = findStrongest(a(i)(1).toInt,army)
+           println(res)
+           }else if(a(i)(0)==2){
+              army = strongestDied(a(i)(1).toInt,army)
+           }else if(a(i)(0)==3){
+              army = recruit(a(i)(1).toInt,a(i)(2),army)
+           }else if(a(i)(0)==4){
+              army = merge(a(i)(1).toInt,a(i)(2).toInt,army)
+           }
+        }
+
+    }
+}
