@@ -1,0 +1,88 @@
+/*
+John's house has bizarre fencing. There are N fences. Though the contiguous fences have the constant width of 1 unit but their height varies. Height of these fences is
+represented by array H = [h1, h2... hN].
+John loves his fences but has to finally bow down to his wife's repeated requests of replacing them with the regular fences.Before taking them down, 
+John wants to keep some part of the fences as souvenir. He decides to carve out the largest rectangular area possible where the largest rectangle can
+be made of a number of contiguous fence. Note that sides of the rectangle should be parallel to X and Y axis.
+Let's say there are 6 fences, and their height is, H = [2, 5, 7, 4, 1, 8]. Then they can be represented as
+                   __
+8         __      |  |
+7        |  |     |  |
+6      __|  |     |  |
+5     |  |  |__   |  |
+4     |  |  |  |  |  |
+3   __|  |  |  |  |  |
+2  |  |  |  |  |__|  |
+1  |__|__|__|__|__|__|
+    h1 h2 h3 h4 h5 h6
+Some possible carvings are as follow:
+If we carve rectangle from h1, h2 and h3 then we can get the max area of 2x3 = 6 units.
+If we carve rectangle from h3, h4, h5 and h6, then max area is 4x1 = 4 units.
+If we carve rectangle from h2, h3 and h4, then max area is 4x3 = 12, which is also the most optimal solution for this case.
+
+Input
+First line will contain an integer N denoting the number of fences. It will be followed by a line containing N space separated integers, h1 h2 ... hN,
+which represents the height of each fence.
+
+Output
+Print the maximum area of rectangle which can be carved out.
+*/
+
+////// this solution is not optimized - 5 test case passed , 6 fail due to time out
+/*import scala.io.StdIn._
+import scala.util.control.Breaks._
+import scala.collection.mutable.ArrayBuffer
+import java.util.Arrays
+
+
+object Solution {
+
+    def main(args: Array[String]) {
+        var n = readInt
+        var arr = readLine.split(" ").map(_.toInt)
+        var max_area = Integer.MIN_VALUE
+        var pro = 1
+        for(i<-0 until arr.size-1){
+           var temp = new ArrayBuffer[Int]()
+           temp+=arr(i)
+           for(j<-i+1 until arr.size){
+              temp+=arr(j)
+              var minimum = temp.min
+              pro = minimum*temp.size
+              if(pro>max_area){
+              max_area = pro
+              }
+           }
+        }
+        println(max_area)
+    }
+}*/
+
+// this solution clears all test case
+import scala.annotation.tailrec
+object Solution {
+
+    def maxArea(fence : Array[Int]) : Int = {
+        if(fence.isEmpty) 0
+        else
+        {
+            val min = fence.min
+            @tailrec
+            def splitByMin(l : Array[Int], d : Int, acc : List[Array[Int]] = List[Array[Int]]()) : List[Array[Int]] = {
+                if(l.isEmpty) acc.reverse
+                else
+                {
+                    val sub = l.takeWhile(_ != d)
+                    splitByMin((l diff sub).dropWhile(_ == d), d, sub +: acc)
+                }
+            }
+            val area = fence.min * fence.length
+            splitByMin(fence, min).map(maxArea).foldLeft(area)(math.max)   
+        }
+    }
+    
+    
+    def main(args: Array[String]) {
+        io.Source.stdin.getLines.drop(1).map(_.split(" ").map(_.toInt)).map(maxArea).foreach(println)
+    }
+}
