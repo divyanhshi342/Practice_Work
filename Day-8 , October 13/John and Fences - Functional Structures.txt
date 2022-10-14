@@ -28,8 +28,7 @@ Output
 Print the maximum area of rectangle which can be carved out.
 */
 
-////// this solution is not optimized - 5 test case passed , 6 fail due to time out
-/*import scala.io.StdIn._
+import scala.io.StdIn._
 import scala.util.control.Breaks._
 import scala.collection.mutable.ArrayBuffer
 import java.util.Arrays
@@ -56,33 +55,4 @@ object Solution {
         }
         println(max_area)
     }
-}*/
-
-// this solution clears all test case
-import scala.annotation.tailrec
-object Solution {
-
-    def maxArea(fence : Array[Int]) : Int = {
-        if(fence.isEmpty) 0
-        else
-        {
-            val min = fence.min
-            @tailrec
-            def splitByMin(l : Array[Int], d : Int, acc : List[Array[Int]] = List[Array[Int]]()) : List[Array[Int]] = {
-                if(l.isEmpty) acc.reverse
-                else
-                {
-                    val sub = l.takeWhile(_ != d)
-                    splitByMin((l diff sub).dropWhile(_ == d), d, sub +: acc)
-                }
-            }
-            val area = fence.min * fence.length
-            splitByMin(fence, min).map(maxArea).foldLeft(area)(math.max)   
-        }
     }
-    
-    
-    def main(args: Array[String]) {
-        io.Source.stdin.getLines.drop(1).map(_.split(" ").map(_.toInt)).map(maxArea).foreach(println)
-    }
-}
