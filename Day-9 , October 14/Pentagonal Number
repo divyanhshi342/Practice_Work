@@ -1,0 +1,21 @@
+import scala.io.StdIn._
+
+object Solution {
+
+    def calculate(n:Int):Long = {
+       
+       var res:Long = scala.math.pow(n,2).toLong ; 
+       var sum:Long = 0L
+       sum = (3*(res) - n)/2
+      
+       return sum
+    }
+    
+    def main(args: Array[String]) {
+        var t = readLine().toInt
+        for(i<-0 to t-1){
+          var n = readLine().toInt
+          println(calculate(n))
+        }
+    }
+}
