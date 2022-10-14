@@ -1,0 +1,39 @@
+import scala.io.StdIn._
+
+object Solution {
+
+def sequence(str:String, red_balls:Int, green_balls:Int, yellow_balls:Int, blue_balls:Int, acc:Int ):Boolean = {
+    if (acc==str.length){
+      if (red_balls == green_balls && yellow_balls == blue_balls)
+        true
+      else
+        false 
+    }
+    else{
+      if (math.abs(red_balls-green_balls)<=1 && math.abs(yellow_balls-blue_balls)<=1){
+        str(acc) match {
+          case 'R' => sequence(str, red_balls+1, green_balls, yellow_balls, blue_balls, acc+1)
+          case 'G' => sequence(str,red_balls, green_balls+1, yellow_balls, blue_balls, acc+1)
+          case 'Y' => sequence(str,red_balls, green_balls, yellow_balls+1, blue_balls, acc+1)
+          case 'B' => sequence(str,red_balls, green_balls, yellow_balls, blue_balls+1, acc+1)
+        }
+      }
+      else
+        false
+    }
+
+  }
+
+    def main(args: Array[String]) {
+        var t = readInt
+        for(i<-0 until t){
+           var s = readLine
+           var ans = sequence(s,0,0,0,0,0)
+           if(ans==false){
+              println("False") 
+           }else{
+              println("True")
+           }
+        }
+    }
+}
