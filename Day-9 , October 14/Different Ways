@@ -1,0 +1,30 @@
+import scala.io.StdIn._
+import scala.collection.mutable 
+
+object Solution {
+
+    var mp = mutable.Map[(Int,Int),Int]()
+   def findWays(n:Int,k:Int):Int={
+    def count(n:Int,k:Int):Int=mp.getOrElseUpdate ((n,k),
+        if(k==n || k==0){
+           return 1
+        }else
+        (count(n-1,k-1)+count(n-1,k))%100000007
+        //return count(n-1,k-1)+count(n-1,k)
+    )
+    count(n,k)
+}
+
+    def main(args: Array[String]) {
+        var t = readInt
+        for(i<-0 until t){
+           var s = readLine.split(" ").map(_.toInt)
+           var n = s(0) ; var k = s(1);
+           if(k==0 || k==n){
+              println(1)
+           }else{
+              println(findWays(n,k))
+           } 
+        }
+    }
+}
