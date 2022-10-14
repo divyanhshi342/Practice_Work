@@ -1,0 +1,39 @@
+import scala.io.StdIn._
+
+object Solution {
+  
+   def connect(x:Int,y:Int,arr:Array[Int]):Array[Int]={
+    var parent = arr map(identity)
+      def root(i:Int):Int={
+           if(i==parent(i))
+               return i 
+             parent(i) = root(parent(i))
+            return root(parent(i))
+      }
+       var i = x 
+       var j = y
+       i = root(x);
+       j = root(y);
+       if (i != j) {
+         parent(j) = i;
+        }
+        return parent
+     }
+   
+   def printAns(m:Int,edges:Array[Array[Int]]):Int = {
+      var parent = new Array[Int](100001)
+      for (i<-1 to m){
+          parent(i) = i
+      }
+      for (i<-0 until edges.length){
+          parent = connect(edges(i)(0), edges(i)(1),parent)
+       }
+       
+      var occurrences = parent.groupBy(l => l).map(t => (t._1,t._2.length))
+      var count = 0
+      for(i<-occurrences.keys){
+           if(i>0 && occurrences(i)>1)
+           count+=occurrences(i)
+       }
+      count
+}
