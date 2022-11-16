@@ -19,7 +19,7 @@ import scala.io.StdIn._
 object Solution {
 
     def main(args: Array[String]) {
-        var str = readLine()
+      /*  var str = readLine()
         var s=""
         for(i<-str){
             if(!(i.equals('a') || i.equals('e') ||  i.equals('y') ||
@@ -34,7 +34,19 @@ object Solution {
         for(i <- 0 until s.length){
             res+="."+s.charAt(i)
         }
+        
         res = res.toLowerCase()
         println(res)
+        */
+        
+        // alternate short solution
+         var a = scala.io.StdIn.readLine
+	  var flag=0
+	  var s = ""
+	  a = a.filter(x=>(x!='a'&& x!='e'&&x!='i'&&x!='o'&&x!='u'))
+	  for(i<-a){
+	    s+="."+i
+	  }
+	  print(s.toLowerCase)
     }
 }
