@@ -16,6 +16,22 @@ import scala.io.StdIn._
 
 object Solution {
 
+/* alternate short solution
+
+	def main(args: Array[String]): Unit = {
+	 var a = scala.io.StdIn.readLine
+	 var b = ""
+	 for(i<-a){
+	   if(!b.contains(i)){
+	     b+=i
+	   }
+	 }
+	 print(b)
+	}
+    
+    */
+
+
     def reduction(s:String):String={
        var sb = new StringBuilder("")
        
