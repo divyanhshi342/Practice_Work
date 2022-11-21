@@ -18,7 +18,43 @@ In first line, print the length of substring p , followed by prefix p . In secon
 Similary in third line, print the length of substring y' , followed by substring y' .
 */
 
+// more precise solution
 import scala.io.StdIn._
+object Solution {
+
+    def findStr(a:String,b:String):String = {
+       var s = ""
+       var min = a.length min b.length
+       var l = 0
+       def commonString():String={
+          if(l>=min){
+             s
+          }else{
+            if(a(l)==b(l)){
+              s+=a(l)
+              l=l+1
+              return commonString()
+            }else{
+               return s
+            }
+          }
+       } 
+       commonString()
+    }
+
+    def main(args: Array[String]) {
+        var x = readLine.trim
+        var y = readLine.trim
+        var common = findStr(x,y)
+        var xx = x.substring(common.length,x.length)
+        var yy = y.substring(common.length,y.length)
+        println(common.length+" "+common)
+        println(xx.length+" "+xx)
+        println(yy.length+" "+yy)
+    }
+}
+
+/*import scala.io.StdIn._
 import scala.util.control.Breaks._
 
 object Solution {
@@ -44,3 +80,4 @@ object Solution {
        println(yy.length+" "+yy)
     }
 }
+*/
