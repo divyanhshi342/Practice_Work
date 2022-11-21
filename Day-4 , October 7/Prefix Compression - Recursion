@@ -25,21 +25,19 @@ object Solution {
     def findStr(a:String,b:String):String = {
        var s = ""
        var min = a.length min b.length
-       var l = 0
-       def commonString():String={
+       def commonString(l:Int):String={
           if(l>=min){
              s
           }else{
             if(a(l)==b(l)){
               s+=a(l)
-              l=l+1
-              return commonString()
+              return commonString(l+1)
             }else{
                return s
             }
           }
        } 
-       commonString()
+       commonString(0)
     }
 
     def main(args: Array[String]) {
