@@ -33,6 +33,11 @@ object Solution {
            var a = scala.io.StdIn.readLine.split(" ").map(_.toLong)
            var occurences = a.groupBy(identity).mapValues(_.length)
            var res = a.distinct.filter(occurences(_) >= k)
+           
+           /* // more precise one
+           var res = a.filter(occurences(_) >= s(1)).distinct
+           */
+           
            if(res.isEmpty){
              println(-1)
            }else{
