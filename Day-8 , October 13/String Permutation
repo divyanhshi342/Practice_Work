@@ -1,0 +1,11 @@
+object Solution {
+
+    def main(args: Array[String]) {
+        var t = scala.io.StdIn.readInt
+        for(i<-0 until t){
+           var s = scala.io.StdIn.readLine
+           var res = s.grouped(2).map(_.reverse).mkString
+           println(res)
+        }
+    }
+}
