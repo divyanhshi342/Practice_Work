@@ -20,6 +20,52 @@ Output Format
 Output all the numbers (in ascending order) that are in B but not in A.
 */
 
+// more easy one
+object Solution {
+
+    def main(args: Array[String]) {
+        var n = scala.io.StdIn.readInt
+        var a = scala.io.StdIn.readLine.split(" ").map(_.toInt)
+        var m = scala.io.StdIn.readInt
+        var b = scala.io.StdIn.readLine.split(" ").map(_.toInt)
+        var mp_a = scala.collection.mutable.Map[Int,Int]()
+        var mp_b = scala.collection.mutable.Map[Int,Int]()
+        var s:Set[Int] = Set()
+        
+        for(i<-0 until a.size){
+           if(mp_a.contains(a(i))){
+              mp_a(a(i))= mp_a(a(i))+ 1
+           }else{
+              mp_a+=(a(i)->1)
+           }
+        }
+        for(i<-0 until b.size){
+           if(mp_b.contains(b(i))){
+              mp_b(b(i)) = mp_b(b(i)) + 1
+           }else{
+              mp_b+=(b(i)->1)
+           }
+        }
+        
+        for(i<-mp_b.keys){
+           if(!mp_a.contains(i)){
+               s+=i
+           }else{
+              if(mp_a(i)<mp_b(i)){
+                 s+=i
+              }
+           }
+        }
+        val ss = collection.immutable.SortedSet[Int]() ++ s
+        for(i<-ss){
+          print(i+" ")
+        }
+        println
+    }
+}
+
+
+/*
 import scala.io.StdIn._
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.immutable.ListMap
@@ -52,4 +98,4 @@ object Solution {
         for(i<-0 until res.size)
         print(res(i)+" ") 
     }
-}
+} */
