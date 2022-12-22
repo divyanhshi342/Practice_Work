@@ -1,0 +1,41 @@
+import scala.util.control.Breaks._
+
+object Solution {
+
+    def main(args: Array[String]) {
+        var n = scala.io.StdIn.readInt
+        var a = scala.io.StdIn.readLine.split(" ").map(_.toLong)
+        var q = scala.io.StdIn.readInt
+        for(i<-0 until q){
+           var s = scala.io.StdIn.readLine.split(" ").map(_.toLong)
+           var d = s(0).toInt
+            var m = s(1)
+           var count = 1
+           if(d<a.size-1){
+           breakable{
+           for(i<-d+1 until a.size){
+              if(a(i)<=(a(d)+m) && a(i)>=a(d)){
+                 count+=1
+              }else{
+                 break
+              }
+           }
+           }
+           
+           }
+           if(d>0){
+           breakable{
+            for(i<-d-1 until -1 by -1){
+              if(a(i)<=(a(d)+m) && (a(i)>=a(d))){
+                 count+=1
+              }else{
+                 break
+              }
+           }
+           }
+           }
+                      println(count)
+
+        } 
+    }
+}
