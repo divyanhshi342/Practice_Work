@@ -1,0 +1,20 @@
+import scala.io.StdIn._
+
+object Main extends App {
+    var t = readInt
+    for(i<-0 until t){
+        var n = readInt
+        var s = ""
+        for(j<-0 until n){
+            s+=readLine
+        }
+        var count_c = (s.filter(x=>x=='c').size) / 2
+        var count_o = s.filter(x=>x=='o').size
+        var count_d = s.filter(x=>x=='d').size
+        var count_e = s.filter(x=>x=='e').size / 2
+        var count_h = s.filter(x=>x=='h').size
+        var count_f = s.filter(x=>x=='f').size
+        var minimum = count_c min (count_o min (count_d min (count_e min (count_h min count_f))))
+        println(minimum)
+    }
+}
