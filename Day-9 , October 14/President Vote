@@ -1,0 +1,28 @@
+import scala.io.StdIn._
+
+object Main extends App {
+	var t = readInt
+	for(i<-0 until t){
+	    var s = readLine.split(" ").map(_.toInt)
+	    var n = s(0) ; var k = s(1) ;
+	    var a = readLine.split(" ").map(_.toInt)
+	    var count = new Array[Int](101)
+	    for(i<-0 until n){
+	        if((count(a(i)) != (-1)) && (a(i)!=(i+1))){
+	            count(a(i))+=1
+	        }
+	        if(a(i)==(i+1)){
+	            count(a(i))= -1
+	        }
+	    }
+	   
+	    var list:List[Int] = List()
+	    for(i<-0 until 101){
+	        if(count(i)>=k){
+	            list = list:+i
+	        }
+	    }
+	  
+	    println(list.size)
+	}
+}
