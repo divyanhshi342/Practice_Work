@@ -1,0 +1,60 @@
+/*
+Given an array of L integers and a number N, write a program to check whether the array is beautiful or not. An array is said to be beautiful if it satisfies the following conditions:
+
+All elements of array must lie between 1 and N (inclusive of 1 and N).
+Array must be unordered
+The array elements are unique.
+Print True if array is beautiful, False otherwise..
+
+Input Format
+
+First line of input contains N.
+
+Second line of input contains L.
+
+Third line of input contains L elements of array separated by spaces. Read the input from standard input.
+
+Print True, if array is beautiful, False otherwise. Print the output to standard output
+
+Sample Input	Sample Output	Explanation
+5
+4
+1 2 3 4	         False	     Array is in ascending order
+8
+5
+4 7 2 5 6	        True	     True, because array satisfies all the required conditions.
+
+*/
+
+import scala.io.StdIn._
+import scala.collection.mutable.Set
+
+
+object HelloWorld {
+    def isBeautiful(n:Int,a:Array[Int],l:Int):Boolean={
+        var li = a.filter(x=>x>=1 && x<=n).size
+        
+        var arr = a map (identity)
+        scala.util.Sorting.quickSort(arr)
+        var set = Set.empty[Int]
+        for(i<-0 until a.length){
+            set+=a(i)
+        }
+        if(li==l && !(a.deep==arr.deep) && set.size == l){
+            return true
+        }else{
+            return false
+        } 
+    }
+    
+    def main(args: Array[String]){
+        var n = readInt()
+        var l = readInt()
+        var a = readLine().split(" ").map(_.toInt)
+        if(isBeautiful(n,a,l)){
+            println("True")
+        }else{
+            println("False")
+        }
+}
+}
