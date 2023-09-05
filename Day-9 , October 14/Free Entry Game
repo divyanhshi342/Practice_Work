@@ -1,0 +1,37 @@
+/*
+Jack is a bouncer giving free passes to selected guests at TranceCode music festival. Write a program to help Jack in finding guest's name having equal number of vowels and unique consonants.
+
+Given a guest's name as a string, print True if the guest gets a free pass, False otherwise.
+
+Input and output format:
+
+Read the input from standard input stream. Print the output to standard output.
+
+Sample Input	Sample Output
+jack mustango	False	
+Jon norponner	True	
+
+
+*/
+
+
+import scala.io.StdIn._
+
+object HelloWorld {
+    def main(args: Array[String]){
+        var str = readLine
+        var count_vowel = str.filter(x=>x=='a' || x== 'e' || x=='i' || x=='o' ||x=='u').size
+        var set = Set.empty[String]
+        var a = str.filter(x=>x!='a' && x!= 'e' && x!='i' && x!='o' && x!='u')
+        for(i<-0 until a.length){
+            if(a(i)!=' ')
+            set+=a(i).toString
+        }
+        var count_conso = set.size
+        if(count_vowel == count_conso){
+            println("True")
+        }else{
+            println("False")
+        }
+}
+}
